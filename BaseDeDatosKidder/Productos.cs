@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BaseDeDatosKidder
 {
-    class Productos
+    public class Productos
     {
         public string ID { get; set; }
         public string Modelo { get; set; }
@@ -15,4 +15,3 @@ namespace BaseDeDatosKidder
         public string Descripcion { get; set; }
     }
 }
-

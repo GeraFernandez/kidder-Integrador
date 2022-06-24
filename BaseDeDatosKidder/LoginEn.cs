@@ -5,12 +5,12 @@ using System.Text;
 
 namespace BaseDeDatosKidder
 {
-    class LoginEn
-    {
-        public int id { set; get; }
-        public string usuario { set; get; }
-        public string contrasenia { set; get; }
-        public int permisos { set; get; }
-    }
+    //class LoginEn
+    //{
+    //    public int id { set; get; }
+    //    public string usuario { set; get; }
+    //    public string contrasenia { set; get; }
+    //    public int permisos { set; get; }
+    //}
 }
 

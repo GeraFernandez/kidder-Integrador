@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace BaseDeDatosKidder
 {
-    internal class Conexion
+    public class Conexion
     {
         private SqlConnection sCon = new SqlConnection();
-        private string con = "Data Source=LAPTOP-1P6UFP3F\\SQLEXPRESS01;Initial Catalog = KIDDER A; Integrated Security = True";
+        private string con = "Data Source=LAPTOP-1P6UFP3F\\SQLEXPRESS01;Initial Catalog=KIDDER;Integrated Security=True";
 
 
         public SqlConnection conectar()

@@ -15,7 +15,7 @@ namespace BaseDeDatosKidder
         public DataTable Consultar()
         {
 
-            string sqlStr = "Select * from Productos";
+            string sqlStr = "SELECT * FROM Productos ";
 
             var da = new SqlDataAdapter(sqlStr, conectar());
             var ds = new DataSet();
@@ -67,6 +67,7 @@ namespace BaseDeDatosKidder
         }
         public void ModificarProductos(Productos pr)
         {
+
             try
             {
 

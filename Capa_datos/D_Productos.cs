@@ -5,17 +5,18 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Capa_entidad;
 
-namespace BaseDeDatosKidder
+namespace Capa_datos
 {
-    class ClientesMetodos : Conexion
+    public class D_Productos : Conexion
     {
         #region Consultas
 
         public DataTable Consultar()
         {
 
-            string sqlStr = "Select * from Clientes";
+            string sqlStr = "SELECT * FROM Productos ";
 
             var da = new SqlDataAdapter(sqlStr, conectar());
             var ds = new DataSet();
@@ -24,13 +25,13 @@ namespace BaseDeDatosKidder
 
             return dt;
         }
-             public DataRow CargaCampos(string ID)
+        public DataRow CargaCampos(string ID)
         {
             DataTable dt = new DataTable();
             var ds = new DataSet();
             DataRow dr;
 
-            string sqlStr = "select * from Clientes where ID = '" + ID + "'";
+            string sqlStr = "select * from Productos where ID = '" + ID + "'";
 
             var da = new SqlDataAdapter(sqlStr, conectar());
             ds = new DataSet();
@@ -46,14 +47,13 @@ namespace BaseDeDatosKidder
 
 
         #region Datos
-        public void GrabarClientes(clientes cl)
+        public void GrabarProductos(E_Prodcutos pr)
         {
             try
             {
 
-                var sel = "set dateformat dmy INSERT INTO Clientes(ID, CUIT, Nombre, Apellido, IVA, Telefono, Email, Calle, Numero, Departamento, Provincia, Ciudad, Postal) VALUES ('"
-                      + cl.ID + "','" + cl.CUIT + "','" + cl.Nombre + "','" + cl.Apellido + "','" + cl.Iva + "','" + cl.Telefono + "','" + cl.Email + 
-                      "','" + cl.Calle + "','" + cl.Numero + "','" + cl.Departamento + "','" + cl.Provincia + "','" + cl.Ciudad + "','" + cl.Postal + "')";
+                var sel = "set dateformat dmy INSERT INTO Productos(ID, Modelo, Color, Talle, Descripcion) VALUES ('"
+                      + pr.ID + "','" + pr.Modelo + "','" + pr.Color + "','" + pr.Talle + "','" + pr.Descripcion + "')";
                 SqlCommand com = new SqlCommand(sel, conectar());
 
 
@@ -66,18 +66,14 @@ namespace BaseDeDatosKidder
             }
 
         }
-        public void ModificarClientes(clientes cl)
+        public void ModificarProductos(E_Prodcutos pr)
         {
+
             try
             {
 
-                var sel = "set dateformat dmy UPDATE Clientes set ID = '" + cl.ID + "', CUIT = '" +
-                     cl.CUIT + "', Nombre = '" + cl.Nombre + "', Apellido = '" +  cl.Apellido + "', IVA = '" + cl.Iva
-                     + "', Telefono = " + cl.Telefono + ", Email= " + cl.Email + "', Calle = '" +
-                     cl.Calle + "', Numero = '" +  cl.Numero + "', Departamento = '" +  cl.Departamento + 
-                     "', Provincia = '" + cl.Provincia
-                     + "', Ciudad = " + cl.Ciudad + ", Postal= " + cl.Postal
-                     + " WHERE ID = '" + cl.ID + "'";
+                var sel = "set dateformat dmy UPDATE Productos set ID = '" + pr.ID + "', Modelo = '" +
+                     pr.Modelo + "', Color = '" + pr.Color + "', Talle = '" + pr.Talle + "', Descripcion = '" + pr.Descripcion + "'";
 
                 SqlCommand com = new SqlCommand(sel, conectar());
 
@@ -90,12 +86,12 @@ namespace BaseDeDatosKidder
             }
 
         }
-        public Boolean BorrarClientes(string ID)
+        public Boolean BorrarProductos(string ID)
         {
             try
             {
-             
-                var sel = "delete from Clientes where ID = '" + ID + "'";
+
+                var sel = "delete from Productos where ID = '" + ID + "'";
 
                 SqlCommand com = new SqlCommand(sel, conectar());
 
@@ -111,10 +107,25 @@ namespace BaseDeDatosKidder
             }
 
         }
+
+        public DataTable BuscarRegistros(string textobuscar)
+        {
+            DataTable DtResultado = new DataTable();
+            SqlCommand SqlCmd = new SqlCommand("spbuscar_productos", conectar())
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            SqlCmd.Parameters.AddWithValue("@textobuscar", textobuscar);
+
+            SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
+            SqlDat.Fill(DtResultado);
+
+            return DtResultado;
+        }
         #endregion
     }
 }
-
 
 
 
